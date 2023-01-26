@@ -1,7 +1,7 @@
 export const config = {
   srcSetSizes: ["256", "512", "768", "1280"],
-  ogImage: "/public/black.jpg",
-  logo: "/public/logo.png",
+  ogImage: "/black.jpg",
+  logo: "/logo.png",
   siteTitle: "PoliteDigital",
   seo: {
     defaultTitle: "PoliteDigital",
@@ -10,7 +10,7 @@ export const config = {
       phone: "Επικοινωνήστε μαζί μας",
     },
   },
-  favico: "/public/favicon.ico",
+  favico: "/favicon.ico",
   contact: {
     phone: "22 252222",
     email: "info@PoliteDigitalio",
@@ -57,5 +57,4 @@ export const config = {
     },
     { title: "Οδική Ασφάλεια", slug: "odiki-asfalia", img: "" },
   ],
-}
-
+};
