@@ -1,0 +1,17 @@
+---
+    const { menu } = Astro.props
+---
+
+<div class="mb-4">
+    <nav class="relative flex flex-wrap items-center justify-between">
+        <ul id="side-menu" class="flex flex-col float-none w-full">
+            {menu.map(item=>(
+            <li class="relative">
+                <a href={item.url}
+                    class="block px-4 py-3 text-white hover:text-opacity-80 focus:text-secondary">{item.title}</a>
+            </li>
+            ))}
+
+        </ul>
+    </nav>
+</div>

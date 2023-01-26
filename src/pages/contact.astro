@@ -1,0 +1,163 @@
+---
+  import Layout from '@layouts/base.layout.astro';
+  import Hero from '@components/Hero.astro';
+  import Error from '@components/Error.astro';
+  import Success from '@components/Success.astro';
+
+  import { config } from '@data/config'
+  const messages = {
+    required: 'Το πεδίο είναι υποχρεοτικό',
+    invalidEmail: 'Το email έχει λάθος μορφή',
+    'firstName': 'Όνομα',
+    'email': 'email',
+    'phone': 'τηλέφωνο',
+    'message': 'μήνυμα',
+    'success': 'απεστάλη',
+    'error': 'σφάλμα',
+    'submit': 'αποστολή',
+    'contactButton': 'αποστολή',
+    'sending': 'στέλνουμε το μήνυμα',
+    'contactInfoTitle': 'Θα μας βρείτε εδώ',
+  }
+---    
+
+<Layout>
+  <Hero>
+    Contact Us
+  </Hero>
+  <!--contact -->
+  <section class="py-16 bg-accent bg-opacity-80 text-gray-50">
+    <div class="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
+      <div class="py-6 md:py-0 md:px-6">
+        <h1 class="text-4xl font-bold">Get in touch</h1>
+        <p class="pt-2 pb-4">Fill in the form to start a conversation</p>
+        <div class="space-y-4">
+          <p class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+              class="w-5 h-5 mr-2 sm:mr-6">
+              <path fill-rule="evenodd"
+                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <span>{config.contact.address}</span>
+          </p>
+          <p class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+              class="w-5 h-5 mr-2 sm:mr-6">
+              <path
+                d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
+              </path>
+            </svg>
+            <span>{config.contact.phone}</span>
+          </p>
+          <p class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+              class="w-5 h-5 mr-2 sm:mr-6">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+            </svg>
+            <span>{config.contact.email}</span>
+          </p>
+        </div>
+      </div>
+      <form method="POST" data-="" x-data="validateForm()" x-init="
+            $watch('fullname', value => { validate('fullname') })
+            $watch('phone', value => { validate('phone') })
+            $watch('email', value => { validate('email') })
+            $watch('message', value => { validate('message') })
+            $watch('submitInvalid', value => { console.log(submitInvalid, 'submit') })
+            " @submit.prevent="submitData" class="flex flex-col py-6 space-y-6 md:py-0 md:px-6">
+        <label class="block" for="fullname">
+          <span class="mb-1">Full name</span>
+          <input type="text" placeholder="Leroy Jenkins"
+            :class="{'border border-red-500':  validation.fullname.touched && fullname === '' || (submitInvalid && fullname === '')}"
+            x-on:blur="inputFieldBlur('fullname')" x-model="fullname" name="fullname"
+            class="block w-full rounded-md shadow-sm focus:ring focus:ring-opacity-75 focus:ring-primary bg-accent bg-opacity-50">
+          <div class="validate">
+            <div x-show="validation.fullname.touched && fullname === '' || (submitInvalid && fullname === '')">
+              <span class="text-sm italic text-red-500">
+                <p>*{messages.required}</p>
+              </span>
+            </div>
+
+            <span class="text-sm italic text-red-500">
+              <div x-text="validation.fullname.message"></div>
+            </span>
+          </div>
+        </label>
+        <label class="block" for="email">
+          <span class="mb-1">Email address</span>
+          <input type="email" placeholder="leroy@jenkins.com"
+            :class="{'border border-red-500': validation.email.touched && email === '' || (submitInvalid && email === '')}"
+            x-on:blur="inputFieldBlur('email')" x-model="email" name="email"
+            class="block w-full rounded-md shadow-sm focus:ring focus:ring-opacity-75 focus:ring-primary bg-accent bg-opacity-50">
+          <div class="validate">
+            <div x-show="validation.email.touched && email === ''">
+              <span class="text-sm italic text-red-500">
+                <p>*{messages.required}</p>
+              </span>
+            </div>
+            <div x-show="submitInvalid && email.trim().length < 2">
+              <span class="text-sm italic text-red-500">
+                <p>{messages.invalidEmail}</p>
+              </span>
+            </div>
+            <span class="text-sm italic text-red-500">
+              <div x-text="validation.email.message"></div>
+            </span>
+          </div>
+        </label>
+        <label class="block" for="phone">
+          <span class="mb-1">Phone</span>
+          <input type="text"
+            :class="{'border border-red-500':  validation.phone.touched && phone === ''  || (submitInvalid && phone === '')}"
+            x-on:blur="inputFieldBlur('phone')" x-model="phone" name="phone"
+            class="block w-full rounded-md shadow-sm focus:ring focus:ring-opacity-75 focus:ring-primary bg-accent bg-opacity-50">
+          <div class="validate">
+            <div x-show="validation.phone.touched && phone === '' || (submitInvalid && phone === '')">
+              <span class="text-sm italic text-red-500">
+                <p>*{messages.required}</p>
+              </span>
+            </div>
+
+            <span class="text-sm italic text-red-500">
+              <div x-text="validation.phone.message"></div>
+            </span>
+          </div>
+        </label>
+        <label class="block" for="message">
+          <span class="mb-1">Message</span>
+          <textarea rows="3"
+            :class="{'border border-red-500': validation.message.touched && message === '' || (submitInvalid && message === '')}"
+            x-on:blur="inputFieldBlur('message')" x-model="message" name="message"
+            class="block w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-primary bg-accent bg-opacity-50"></textarea>
+          <div class="validate">
+            <div x-show="validation.message.touched && message === '' || (submitInvalid && message === '')">
+              <span class="text-sm italic text-red-500">
+                <p>*{messages.required}</p>
+              </span>
+            </div>
+
+            <span class="text-sm italic text-red-500">
+              <div x-text="validation.message.message"></div>
+            </span>
+          </div>
+        </label>
+        <div x-init="checkValidity" class="px-16 py-8">
+          <div x-show="submitInvalid">
+            <Error message={messages.error} />
+          </div>
+          <div x-show="submitted">
+            <Success message={messages.success} />
+          </div>
+        </div>
+        <button type="submit" id="submit" data-formname={import.meta.env.PUBLIC_CONTACT_FORM_NAME}
+          data-url={import.meta.env.PUBLIC_API_URL} data-captcha={import.meta.env.PUBLIC_RECAPTCHA}
+          class="self-center px-8 py-3 text-lg rounded focus:ring hover:ring bg-primary text-gray-900 focus:ring-opacity-80 hover:bg-opacity-80 hover:ring-opacity-80">Submit</button>
+      </form>
+    </div>
+  
+  </section>
+  <!--end contact-->
+</Layout>
+<script defer src={`https://www.google.com/recaptcha/api.js?render=${import.meta.env.PUBLIC_RECAPTCHA}`}></script>

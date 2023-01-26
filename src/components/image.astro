@@ -1,0 +1,18 @@
+---
+export interface IImage {
+    url: string;
+    title: string;
+}
+
+export interface Props {
+	img: IImage;
+}
+
+
+const { img } = Astro.props;
+---
+
+<div>
+<img src={img.url} title={img.title} />
+
+</div>

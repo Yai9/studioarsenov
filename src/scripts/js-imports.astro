@@ -1,0 +1,299 @@
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.2/cdn.min.js"
+  defer
+></script>
+<script defer>
+  window.validateForm = function () {
+    return {
+      fullname: "",
+      phone: "",
+      email: "",
+      message: "",
+      status: false,
+      submitInvalid: false,
+      submitted: false,
+      captchaToken: null,
+      url: "",
+      key: "",
+      formName: "",
+      validation: {
+        fullname: {
+          rule: {
+            minLength: function (field, value = 2) {
+              if (field && field.trim().length >= value) {
+                return {
+                  error: false,
+                  message: "",
+                }
+              } else {
+                return {
+                  error: true,
+                  message: `This field must have minimum ${value} characters length.`,
+                }
+              }
+            },
+          },
+          error: true,
+          message: "",
+          touched: false,
+        },
+        phone: {
+          rule: {
+            minLength: function (field, value = 2) {
+              if (field && field.trim().length >= value) {
+                return {
+                  error: false,
+                  message: "",
+                }
+              } else {
+                return {
+                  error: true,
+                  message: `This field must have minimum ${value} characters length.`,
+                }
+              }
+            },
+          },
+          error: true,
+          message: "",
+          touched: false,
+        },
+        email: {
+          rule: {
+            email: function (field) {
+              const rgx =
+                /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+              if (rgx.test(field)) {
+                return {
+                  error: false,
+                  message: "",
+                }
+              } else {
+                return {
+                  error: true,
+                  message: "This field has wrong email address format.",
+                }
+              }
+            },
+          },
+          error: true,
+          message: "",
+          touched: false,
+        },
+        message: {
+          rule: {
+            minLength: function (field, value = 2) {
+              if (field && field.trim().length >= value) {
+                return {
+                  error: false,
+                  message: "",
+                }
+              } else {
+                return {
+                  error: true,
+                  message: `This field must have minimum ${value} characters length.`,
+                }
+              }
+            },
+          },
+          error: true,
+          message: "",
+          touched: false,
+        },
+      },
+      checkValidity() {
+        this.$watch("fullname", () => {
+          this.checkValues()
+        })
+        this.$watch("phone", () => {
+          this.checkValues()
+        })
+        this.$watch("email", () => {
+          this.checkValues()
+        })
+        this.$watch("message", () => {
+          this.checkValues()
+        })
+      },
+      checkValues() {
+        if (
+          this.fullname.trim().length !== 0 ||
+          this.phone.trim().length !== 0 ||
+          this.email.trim().length !== 0 ||
+          this.message.trim().length !== 0
+        ) {
+          this.submitInvalid = false
+        }
+      },
+      validate(field) {
+        for (const key in this.validation[field].rule) {
+          const validationResult = this.validation[field].rule[key](this[field])
+          if (validationResult.error && this.validation[field].touched) {
+            this.validation[field].error = true
+            this.validation[field].message = validationResult.message
+            break
+          }
+          this.validation[field].error = false
+          this.validation[field].message = ""
+          this.validation[field].touched = this.validation[field].touched
+          continue
+        }
+      },
+      async submitData(event) {
+        // Ensures all fields have data before submitting
+        const rgx =
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+        if (
+          this.fullname.trim().length < 2 ||
+          this.phone.trim().length < 2 ||
+          this.email.trim().length < 2 ||
+          this.email.trim().length < 2 ||
+          !rgx.test(this.email) ||
+          this.message.trim().length < 2
+        ) {
+          this.submitInvalid = true
+          return
+        }
+        this.submitInvalid = false
+        this.captchaToken = this.$el.querySelector("#submit").dataset.captcha
+        this.url = this.$el.querySelector("#submit").dataset.url
+        this.formName = this.$el.querySelector("#submit").dataset.formname
+
+        let token
+        try {
+          token = await grecaptcha.execute(this.captchaToken, {
+            action: "submit",
+          })
+        } catch (e) {
+          console.error(e)
+        }
+
+        if (!token) {
+          alert("Invalid captcha resolution")
+          return
+        }
+
+        const url = this.url
+        const formName = this.formName
+
+        try {
+          const res = await fetch(`/api/send-mail`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            body: JSON.stringify({
+              ...{
+                token,
+              },
+              ...{
+                form: formName,
+              },
+              ...{
+                fullname: this.fullname,
+                phone: this.phone,
+                email: this.email,
+                message: this.message,
+              },
+            }),
+          })
+
+          if (res.success) {
+            this.status = true
+            this.submitted = true
+            this.submitInvalid = false
+            this.fullname = ""
+            this.email = ""
+            this.phone = ""
+            this.message = ""
+            this.validation.fullname.touched = false
+            this.validation.email.touched = false
+            this.validation.phone.touched = false
+            this.validation.message.touched = false
+          }
+
+          return await res.json()
+        } catch (e) {
+          console.log(e)
+        }
+
+        setTimeout(() => {
+          this.submitted = false
+        }, 2000)
+      },
+      inputFieldBlur(field) {
+        this.validation[field].touched = true
+      },
+    }
+  }
+</script>
+<script defer>
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("whoWeAre", () => ({
+      text: "",
+      textArray: ["Develop", "Maintain"],
+      textIndex: 0,
+      charIndex: 0,
+      pauseEnd: 1500,
+      cursorSpeed: 420,
+      pauseStart: 20,
+      typeSpeed: 150,
+      direction: "forward",
+      init() {
+        const self = this
+        let typingInterval = setInterval(startTyping, self.typeSpeed)
+
+        function startTyping() {
+          let current = self.textArray[self.textIndex]
+          if (self.charIndex > current.length) {
+            self.direction = "backward"
+            clearInterval(typingInterval)
+            setTimeout(function () {
+              typingInterval = setInterval(startTyping, self.typeSpeed)
+            }, self.pauseEnd)
+          }
+
+          self.text = current.substring(0, self.charIndex)
+          if (self.direction == "forward") {
+            self.charIndex += 1
+          } else {
+            if (self.charIndex == 0) {
+              self.direction = "forward"
+              clearInterval(typingInterval)
+              setTimeout(function () {
+                self.textIndex += 1
+                if (self.textIndex >= self.textArray.length) {
+                  self.textIndex = 0
+                }
+
+                typingInterval = setInterval(startTyping, self.typeSpeed)
+              }, self.pauseStart)
+            }
+            self.charIndex -= 1
+          }
+        }
+      },
+    }))
+  })
+</script>
+<script defer>
+  const callback = function (entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate-fadeIn")
+        entry.target.classList.add("animate-fadeIn")
+      } else {
+        entry.target.classList.remove("animate-fadeIn")
+      }
+    })
+  }
+
+  const observer = new IntersectionObserver(callback)
+
+  const targets = document.querySelectorAll(".js-show-on-scroll")
+  targets.forEach(function (target) {
+    target.classList.add("opacity-0")
+    observer.observe(target)
+  })
+</script>

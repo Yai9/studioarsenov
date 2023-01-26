@@ -1,0 +1,18 @@
+---
+	const defaultImage = '/public/hero-bg.png';
+	const { img = defaultImage, subtitle = null } = Astro.props;
+---
+
+<div class="w-full h-[720px] relative bg-fixed bg-cover bg-center flex justify-center items-center"
+	style={`background-image:url(${img});`}>
+	<div class="absolute w-full h-full"></div>
+	<div class="flex flex-col p-4">
+		<h1 class="flex-none text-3xl text-center xs:text-5xl font-bold text-white drop-shadow-md">
+			<slot></slot>
+		</h1>
+		{subtitle && (
+		<h2 class="flex-none text-center my-6 text-xl text-white drop-shadow-md">{subtitle}</h2>
+		)}
+	</div>
+
+</div>

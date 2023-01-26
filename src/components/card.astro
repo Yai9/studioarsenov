@@ -1,0 +1,14 @@
+---
+import Img from './image.astro';
+const clientName = import.meta.env.CLIENT_NAME;
+const {img} = Astro.props;
+---
+<h1>{clientName}</h1>
+<div>
+    <slot name="title"></slot>
+    {img && (
+        <Img img={img} />
+    )}
+    <slot></slot>
+    <slot name="footer"></slot>
+</div>
