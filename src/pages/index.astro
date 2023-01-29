@@ -24,7 +24,7 @@ import { Icon } from "astro-icon"
   }
 </style>
 <Layout>
-  <Hero>WELCOME TO</Hero>
+  <Hero subtitle="PoliteDigital">WELCOME TO</Hero>
 
   <div class="top-section">
     <!-- Service start -->
@@ -280,7 +280,7 @@ import { Icon } from "astro-icon"
       <div class="flex flex-wrap flex-row -mx-4 items-center justify-center">
         <!-- content -->
         <div
-          class="flex-shrink max-w-full px-4 w-full lg:w-1/2 xl:mr-auto z-10"
+          class="flex-shrink max-w-full px-4 w-full lg:w-1/2 z-10"
         >
           <div class="text-center lg:ltr:text-left lg:rtl:text-right">
             <h1
@@ -302,51 +302,18 @@ import { Icon } from "astro-icon"
           </div>
         </div><!-- end content -->
 
-        <!-- intro images -->
-        <div class="flex-shrink max-w-full px-10 w-full lg:w-1/2 xl:w-5/12">
-          <div class="relative md:-mt-2 mb-16" style="padding-bottom: 160%">
-            <!-- Android potrait -->
-            <figure class="absolute left-0 top-0 w-full">
-              <svg
-                version="1.0"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 480.000000 906.000000"
-              >
-                <!-- Clip path image -->
-                <defs>
-                  <clipPath id="svgf">
-                    <rect x="50" y="16.5" width="480" height="1066"></rect>
-                  </clipPath>
-                </defs>
-                <!-- Phone screen -->
-                <image
-                  clip-path="url(/website-3.jpg)"
-                  xlink:href="/website-3.jpg"
-                  height="94%"
-                  width="100%"
-                  style="transform:translateY(15px);"
-                />
-                <!-- Phone cover -->
-                <image
-                  xlink:href="/website-3.jpg"
-                  height="100%"
-                  width="100%"
-                />
-              </svg>
-            </figure>
-          </div>
-        </div>
+        
       </div>
     </div>
   </div><!-- end hero -->
   <!--contact form -->
   <!-- Container for demo purpose -->
-  <div id="contact" class="mt-24 px-6 mx-auto">
+  <div id="contact" class="mt-24 px-1 sm:px-6 mx-auto">
     <!-- Section: Design Block -->
     <section class="text-gray-800">
       <div
-        class="relative overflow-hidden bg-no-repeat bg-cover"
-        style="background-position: 50%; background-image: url('/contact-us.jpg'); height: 300px; border-radius: 10px;"
+        class="relative overflow-hidden bg-no-repeat bg-[url('/public/mobile-contact-us.png')] lg:bg-[url('/public/contact-us.jpg')] bg-cover"
+        style="background-position: 50%; height: 300px; border-radius: 10px;"
       >
       </div>
       <div class="text-gray-800 px-4 md:px-12">
