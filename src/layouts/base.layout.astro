@@ -1,75 +1,74 @@
 ---
-    import { SEO } from "astro-seo";
-    import Header from '@components/NavHeader.astro';
-    import Footer from '@components/Footer.astro';
-    import { config } from '@data/config';
-    import Scripts from '../scripts/js-imports.astro'
-    const lang = 'el_EL';
+import { SEO } from "astro-seo"
+import Header from "@components/NavHeader.astro"
+import Footer from "@components/Footer.astro"
+import { config } from "@data/config"
+import Scripts from "../scripts/js-imports.astro"
+const lang = "el_EL"
 
-    const ogImage = config.ogImage;
-    const defaultSeo = {
+const ogImage = config.ogImage
+const defaultSeo = {
+  title: config.seo.defaultTitle,
+  description: config.seo.defaultDescription,
+  openGraph: {
+    basic: {
+      title: config.seo.defaultTitle,
+      type: "website",
+      description: config.seo.defaultDescription,
+      image: ogImage,
+      url: Astro.url.href,
+    },
+    image: {
+      secureUrl: ogImage,
+      alt: config.seo.defaultTitle,
+    },
+  },
+}
 
-        title: config.seo.defaultTitle,
-        description: config.seo.defaultDescription,
-        openGraph: {
-            basic: {
-                title: config.seo.defaultTitle,
-                type: 'website',
-                description: config.seo.defaultDescription,
-                image: ogImage,
-                url: Astro.url.href,
-            },
-            image: {
-                secureUrl: ogImage,
-                alt: config.seo.defaultTitle
-            }
-        }
+const { seo } = Astro.props
 
-    };
-
-    const { seo } = Astro.props;
-
-    const seoObj = { ...defaultSeo, ...seo };
+const seoObj = { ...defaultSeo, ...seo }
 ---
 
 <html lang={lang}>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta charset="UTF-8">
- <meta
-      property="og:title"
-      content="PoliteDigital"
-    />
+    <meta charset="UTF-8" />
+    <meta property="og:title" content="PoliteDigital" />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:image"
-      content="/public/logo.png"
-    />
+    <meta property="og:image" content={config.ogImage} />
     <meta property="og:url" content="/public/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PoliteDigital" />
+    <meta name="twitter:description" content="PoliteDigital" />
+    <meta name="twitter:site" content="politedigital.com" />
+    <meta name="twitter:image" content={config.ogImage} />
+    <meta name="twitter:creator" content="politedigital.com" />
     <link rel="icon" type="image/x-icon" href={config.favico} />
-    <SEO title={seoObj.title} description={seoObj.description} openGraph={seoObj.openGraph} />
+    <SEO
+      title={seoObj.title}
+      description={seoObj.description}
+      openGraph={seoObj.openGraph}
+    />
 
     <style>
-        html{
-            scroll-behavior: smooth
-        }
-        .top-section {
-            content-visibility: auto;
-            content-intrinsic-size: 1px 2500px
-        }
+      html {
+        scroll-behavior: smooth;
+      }
+      .top-section {
+        content-visibility: auto;
+        content-intrinsic-size: 1px 2500px;
+      }
     </style>
 
-    <meta charset="UTF-8">
-</head>
+    <meta charset="UTF-8" />
+  </head>
 
-
-<body>
+  <body>
     <Header />
-    <slot></slot>
+    <slot />
     <Footer />
     <Scripts />
-</body>
-
+  </body>
 </html>

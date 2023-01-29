@@ -1,6 +1,6 @@
 export const config = {
   srcSetSizes: ["256", "512", "768", "1280"],
-  ogImage: "/black.jpg",
+  ogImage: "/og-image.png",
   logo: "/logo.png",
   siteTitle: "PoliteDigital",
   seo: {
@@ -57,4 +57,4 @@ export const config = {
     },
     { title: "Οδική Ασφάλεια", slug: "odiki-asfalia", img: "" },
   ],
-};
+}
