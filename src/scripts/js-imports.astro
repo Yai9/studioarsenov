@@ -297,3 +297,16 @@
     observer.observe(target)
   })
 </script>
+
+<script defer>
+  window.onscroll = function () {
+    const ud_header = document.querySelector(".header")
+    const sticky = ud_header.offsetTop
+
+    if (window.pageYOffset > sticky) {
+      ud_header.classList.add("sticky-header")
+    } else {
+      ud_header.classList.remove("sticky-header")
+    }
+  }
+</script>

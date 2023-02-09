@@ -2,38 +2,39 @@ export const config = {
   srcSetSizes: ["256", "512", "768", "1280"],
   ogImage: "/og-image.png",
   logo: "/logo.png",
-  siteTitle: "PoliteDigital",
+  siteTitle: "Studio Arsenov",
   seo: {
-    defaultTitle: "PoliteDigital",
-    defaultDescription: "PoliteDigital",
+    defaultTitle: "Studio Arsenov",
+    defaultDescription: "Studio Arsenov",
     contact: {
-      phone: "Επικοινωνήστε μαζί μας",
+      phone: "+381641300913",
     },
   },
   favico: "/favicon.ico",
   contact: {
     phone: "22 252222",
-    email: "info@PoliteDigitalio",
-    address: `Λεωφ. Κανταράς 79,
-         2043 Στρόβολος, 
-         P.O.Box: 20368,
-         CY2151`,
+    email: "fotostudiopaparazzo@gmail.com",
+    address: `Novosadska 4. 22320 Indjija`,
   },
   menu: [
     {
-      title: "Home",
+      title: "NASLOVNA",
       url: "/#",
     },
     {
-      title: "About us",
+      title: "O NAMA",
       url: "/#about-us",
     },
     {
-      title: "Services",
+      title: "USLUGE",
       url: "/#services",
     },
     {
-      title: "Contact",
+      title: "PORTFOLIO",
+      url: "/#services",
+    },
+    {
+      title: "KONTAKT",
       url: "/#contact",
     },
   ],
