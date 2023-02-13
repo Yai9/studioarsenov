@@ -12,7 +12,7 @@ export const config = {
   },
   favico: "/favicon.ico",
   contact: {
-    phone: "22 252222",
+    phone: "",
     email: "fotostudiopaparazzo@gmail.com",
     address: `Novosadska 4. 22320 Indjija`,
   },
@@ -23,11 +23,11 @@ export const config = {
     },
     {
       title: "O NAMA",
-      url: "/#about-us",
+      url: "/#o-nama",
     },
     {
       title: "USLUGE",
-      url: "/#services",
+      url: "/#usluge",
     },
     {
       title: "PORTFOLIO",

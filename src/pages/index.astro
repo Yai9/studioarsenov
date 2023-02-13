@@ -20,41 +20,174 @@ import { Icon } from "astro-icon"
   }
 
   .animate-fadeIn {
-    animation: fadeIn 1.5s ease-in-out forwards;
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+
+  .heading-underline {
+    position: relative;
+    color: white;
+    text-decoration: none;
+  }
+
+  .heading-underline:hover {
+    color: white;
+  }
+
+  .heading-underline::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .heading-underline:hover::before {
+    transform: scaleX(1);
   }
 </style>
 <Layout>
   <Hero subtitle="Studio Arsenov">WELCOME TO</Hero>
 
   <div class="top-section">
-    <!-- Service start -->
-    <!-- This example requires Tailwind CSS v3.0+ -->
-    <div>
+    <!-- about us start -->
+    <div id="o-nama">
       <div class="mx-auto py-24 sm:px-6 sm:py-32 lg:px-8">
         <div
           class="relative overflow-hidden bg-[url('/public/assets/photos/Z6D_5739.jpg')] bg-center bg-cover px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0"
         >
           <div
-            class="absolute inset-0 bg-gradient-to-l from-black/70 to-gray-900/5"
+            class="absolute inset-0 bg-gradient-to-r from-black/60 to-gray-900/5"
           >
           </div>
           <div
-            class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left"
+            class="mx-auto max-w-md text-center py-10 lg:mx-0 lg:ml-auto lg:py-16 lg:text-left"
           >
-            <h2
-              class="text-3xl font-bold tracking-tight text-white sm:text-4xl"
+            <div
+              class="animate-fadeIn js-show-on-scroll bg-primary p-16 rounded-3xl bg-opacity-50 ml-auto"
             >
-              Boost your productivity.<br />Start using our app today.
-            </h2>
-            <p class="mt-6 text-lg leading-8 text-gray-300">
-              Ac euismod vel sit maecenas id pellentesque eu sed consectetur.
-              Malesuada adipiscing sagittis vel nulla.
-            </p>
+              <h2
+                class="relative text-3xl font-bold tracking-tight text-white sm:text-4xl"
+              >
+                ŽELITE DA ZNATE VIŠE O NAMA?<br />
+              </h2>
+              <p class="relative mt-6 text-lg leading-8 text-gray-200">
+                Sa iskustvom od skoro dve decenije, naš studio se ističe u
+                pružanju vrhunskih usluga svojim klijentima, kao i ambicijom da
+                na svaku osobu sa kojom ostvarimo saradnju ostavimo trajan
+                utisak.
+              </p>
+              <br />
+              <button class="relative mt-6 text-lg leading-8 text-white"
+                >Saznajte vise</button
+              >
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- End Service -->
-    
+      <!-- End about us -->
+      <!--services start -->
+      <div id="usluge">
+        <div class="mx-auto sm:px-6 lg:px-8">
+          <div
+            class="relative bg-center bg-cover overflow-hidden bg-[url('/public/assets/photos/DEJ_7886.jpg')] py-20 px-6 sm:rounded-3xl sm:py-24 sm:px-10 lg:py-24 xl:px-24"
+          >
+            <div
+              class="animate-fadeIn js-show-on-scroll bg-primary p-20 rounded-3xl bg-opacity-50 mx-auto grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center lg:gap-y-0"
+            >
+              <div class="lg:row-start-2 lg:max-w-md">
+                <h2
+                  class="text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                >
+                  Vi ste tu da nam kažete šta želite, mi smo tu da Vaše želje
+                  ostanu zapisane i ostvarene...
+                </h2>
+                <p class="mt-6 text-lg leading-8 text-gray-300">
+                  Jedinstven osecaj je ono cemu smo posveceni i zahvalni smo na
+                  prilici da ostavimo trag i budemo deo onoga sto se pamti.
+                </p>
+              </div>
+              <div
+                class="max-w-xl lg:row-start-3 lg:mt-10 lg:max-w-md lg:border-t lg:border-white/10 lg:pt-10"
+              >
+                <dl
+                  class="max-w-xl space-y-8 text-base leading-7 text-gray-300 lg:max-w-none"
+                >
+                  <div
+                    class="heading-underline relative p-4 rounded-t-3xl transition-all cursor-pointer hover:bg-primary/30"
+                  >
+                    <dt class="text-xl inline-block font-semibold text-white">
+                      Fotografije sa venčanja
+                    </dt>
+                    <br />
+                    <dd class="inline">
+                      Tu smo da sa vama podelimo radost i uveličamo vaš dogadjaj
+                      i doprinesemo da on ostane upamćen.
+                    </dd>
+                  </div>
+
+                  <div
+                    class="heading-underline relative p-4 rounded-t-3xl transition-all cursor-pointer hover:bg-primary/30"
+                  >
+                    <dt class="text-xl inline-block font-semibold text-white">
+                      Fotografije u studiju
+                    </dt>
+                    <br />
+                    <dd class="inline">
+                      Ukoliko želite profesionalne fotografije, stojima usluzi
+                      vašim željama i kreativnosti.
+                    </dd>
+                  </div>
+
+                  <div
+                    class="heading-underline relative p-4 rounded-t-3xl transition-all cursor-pointer hover:bg-primary/30"
+                  >
+                    <dt class="text-xl inline-block font-semibold text-white">
+                      Video produkcija
+                    </dt>
+                    <br />
+                    <dd class="inline">
+                      Ukoliko želite da svaki trenutak vašeg posebnog dana
+                      ostane zabeležen, na pravom ste mestu.
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <svg
+              class="pointer-events-none absolute top-1/2 left-12 -z-10 h-[42.375rem] -translate-y-1/2 transform-gpu blur-3xl lg:top-auto lg:bottom-[-12rem] lg:translate-y-0"
+              viewBox="0 0 1155 678"
+              fill="none"
+            >
+              <path
+                fill="url(#c0458c57-1330-459f-9d5c-f0d75c210466)"
+                fill-opacity=".25"
+                d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
+              ></path>
+              <defs>
+                <linearGradient
+                  id="c0458c57-1330-459f-9d5c-f0d75c210466"
+                  x1="1155.49"
+                  x2="-78.208"
+                  y1=".177"
+                  y2="474.645"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#9089FC"></stop>
+                  <stop offset="1" stop-color="#FF80B5"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!--end services -->
+    </div>
   </div>
 </Layout>

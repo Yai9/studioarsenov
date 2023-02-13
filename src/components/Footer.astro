@@ -1,44 +1,43 @@
-<footer class="w-full  relative bg-fixed bg-cover bg-center flex justify-center items-center"
-  style="background-image:url(https://argousblue.com/wp-content/uploads/2018/07/bg-footer.jpg?id=37);">
+---
+import { config } from "@data/config"
+import Icon from "astro-icon"
+---
 
+<footer
+  class="w-full relative bg-fixed bg-cover bg-center flex justify-center items-center"
+  style="background-image:url(https://argousblue.com/wp-content/uploads/2018/07/bg-footer.jpg?id=37);"
+>
   <div class="w-full bg-transparent sm:pt-10 lg:pt-6">
     <div class="px-4 mx-auto max-w-7xl md:px-8">
       <div class="grid gap-4 pt-10 lg:pt-6">
         <div class="grid grid-cols-2 col-span-2 justify-between">
-
-
-          <!-- social - start 
           <div class="gap-4 w-full">
             <p class="mb-6 text-gray-300 sm:pr-8">Social links:</p>
-            {config.socials.map(social=>(
-            <a href={social.url} target="_blank" alt={social.title} title={social.title}
-              class="text-gray-400 w-6 inline-flex transition m-1 duration-100 hover:text-gray-500 active:text-gray-600">
-              <Icon name={social.icon} />
-            </a>
-            ))}
-          </div> -->
-
-
-<!-- 
-          <ul class="flex flex-wrap gap-4 mt-2 lg:ml-auto flex-row lg:mt-0">
-            {config.menu.map(item => (
-            <li>
-              <a class="transition duration-100 text-secondary hover:text-primary active:text-primary" href={item.url}
-                title={item.title}>
-                {item.title}
-              </a>
-            </li>
-            ))}
-          </ul>
+            {
+              config.socials.map((social) => (
+                <a
+                  href={social.url}
+                  target="_blank"
+                  title={social.title}
+                  class="text-gray-400 w-6 inline-flex transition m-1 duration-100 hover:text-gray-500 active:text-gray-600"
+                >
+                  <Icon name={social.icon} />
+                </a>
+              ))
+            }
+          </div>
         </div>
-        -->
 
-        <div class="py-8 text-sm text-center justify-center col-span-2 text-gray-400 border-t">
-          © {(new Date).getFullYear()} - <a href="https://arky.io"
-            title="Κατασκευή ιστοσελίδας">Handcrafted by <strong>Arky</strong></a>
+        <div
+          class="py-8 text-sm text-center justify-center col-span-2 text-gray-400 border-t"
+        >
+          © {new Date().getFullYear()} - <a
+            href="https://politedigital.com"
+            title="Website development"
+            >Handcrafted by <strong>PoliteDigital</strong></a
+          >
         </div>
       </div>
     </div>
   </div>
-
 </footer>
